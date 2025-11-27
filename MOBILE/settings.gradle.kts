@@ -5,8 +5,6 @@ pluginManagement {
                 includeGroupByRegex("com\\.android.*")
                 includeGroupByRegex("com\\.google.*")
                 includeGroupByRegex("androidx.*")
-
-                // ⭐️ THÊM DÒNG NÀY ĐỂ SỬA LỖI ⭐️
                 includeGroupByRegex("com\\.google\\.gms.*")
             }
         }

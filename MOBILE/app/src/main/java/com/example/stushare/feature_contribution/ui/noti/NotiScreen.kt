@@ -1,4 +1,5 @@
-package com.stushare.feature_contribution.ui.noti
+
+package com.example.stushare.feature_contribution.ui.noti
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,17 +11,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.stushare.feature_contribution.R
-import com.stushare.feature_contribution.ui.theme.BlueInfo
-import com.stushare.feature_contribution.ui.theme.GreenPrimary
-import com.stushare.feature_contribution.ui.theme.OrangeWarning
+
+import com.example.stushare.R
+import com.example.stushare.feature_contribution.ui.theme.BlueInfo
+import com.example.stushare.feature_contribution.ui.theme.GreenPrimary
+import com.example.stushare.feature_contribution.ui.theme.OrangeWarning
 
 @Composable
 fun NotiScreen(viewModel: NotiViewModel) {
@@ -29,13 +30,13 @@ fun NotiScreen(viewModel: NotiViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // Màu nền động
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Text(
             text = stringResource(R.string.noti_header),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground, // Màu chữ động
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(16.dp)
         )
 
@@ -54,7 +55,7 @@ fun NotificationItemRow(item: NotificationItem) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), // Màu thẻ động
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
@@ -85,7 +86,7 @@ fun NotificationItemRow(item: NotificationItem) {
                         text = item.title,
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
-                        color = MaterialTheme.colorScheme.onSurface, // Màu chữ động
+                        color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.weight(1f)
                     )
                     Text(

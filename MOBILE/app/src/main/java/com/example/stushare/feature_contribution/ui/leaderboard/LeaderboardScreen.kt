@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.leaderboard
+package com.example.stushare.feature_contribution.ui.leaderboard
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -22,6 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stushare.feature_contribution.R
 import com.stushare.feature_contribution.ui.theme.GreenPrimary
 import kotlinx.coroutines.launch
+import com.example.stushare.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

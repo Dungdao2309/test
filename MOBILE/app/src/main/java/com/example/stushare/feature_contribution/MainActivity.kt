@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution
+package com.example.stushare.feature_contribution
 
 import android.app.LocaleManager
 import android.os.Build
@@ -26,6 +26,7 @@ import com.stushare.feature_contribution.ui.components.BottomNavBar
 import com.stushare.feature_contribution.ui.theme.StuShareTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import com.example.stushare.R
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

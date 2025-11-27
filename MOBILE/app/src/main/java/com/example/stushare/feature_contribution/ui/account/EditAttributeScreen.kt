@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.account
+package com.example.stushare.feature_contribution.ui.account
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.stushare.feature_contribution.R
 import com.stushare.feature_contribution.ui.theme.GreenPrimary
+import com.example.stushare.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

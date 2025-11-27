@@ -1,27 +1,25 @@
-package com.stushare.feature_contribution.ui.upload
+
+package com.example.stushare.feature_contribution.ui.upload
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.stushare.feature_contribution.db.AppDatabase
-import com.stushare.feature_contribution.db.DocumentRepository // Import Repository
-import com.stushare.feature_contribution.db.NotificationEntity
-import com.stushare.feature_contribution.db.SavedDocumentEntity
-import com.stushare.feature_contribution.ui.noti.NotificationItem
-import kotlinx.coroutines.delay
+import com.example.stushare.feature_contribution.db.AppDatabase
+import com.example.stushare.feature_contribution.db.DocumentRepository
+import com.example.stushare.feature_contribution.db.NotificationEntity
+import com.example.stushare.feature_contribution.db.SavedDocumentEntity
+import com.example.stushare.feature_contribution.ui.noti.NotificationItem
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import com.example.stushare.R
 
 class UploadViewModel(application: Application) : AndroidViewModel(application) {
 
-    // Khởi tạo Database
     private val database = AppDatabase.getInstance(application)
     private val notificationDao = database.notificationDao()
-
-    // Khởi tạo Repository (thay vì dùng trực tiếp DAO)
     private val documentRepository = DocumentRepository(database.savedDocumentDao())
 
     private val _isUploading = MutableStateFlow(false)
@@ -35,31 +33,23 @@ class UploadViewModel(application: Application) : AndroidViewModel(application) 
         data class Error(val message: String) : UploadResult()
     }
 
-    fun handleUploadClick(title: String, description: String?) {
+    fun handleUploadClick(title: String, description: String?) { // Đã khớp tham số với UploadScreen
         viewModelScope.launch {
             _isUploading.value = true
             try {
-                // --- BẮT ĐẦU LOGIC ---
-
-                // 1. Giả lập delay (nếu muốn test UI loading)
-                // delay(1000)
-
-                // 2. TẠO OBJECT TÀI LIỆU
-                // documentId tạm thời để trống, Repository sẽ cập nhật ID thật từ Firestore sau khi upload
+                // Tạo object tài liệu
                 val newDocument = SavedDocumentEntity(
                     documentId = "",
                     title = title,
-                    author = "Người dùng hiện tại", // TODO: Thay bằng tên thật từ User Profile
+                    author = "Người dùng hiện tại",
                     subject = "Môn học chung",
                     metaInfo = "0 lượt tải · Môn học chung",
                     addedTimestamp = System.currentTimeMillis()
                 )
 
-                // 3. GỌI REPOSITORY ĐỂ UPLOAD
-                // Repository sẽ lo việc gửi lên Firestore VÀ lưu vào Room
                 documentRepository.uploadDocument(newDocument)
 
-                // 4. TẠO VÀ LƯU THÔNG BÁO (Logic local - chỉ lưu trên máy này)
+                // Tạo thông báo
                 val newNotification = NotificationEntity(
                     title = "Tải lên thành công",
                     message = "Tài liệu: $title",
@@ -68,8 +58,6 @@ class UploadViewModel(application: Application) : AndroidViewModel(application) 
                     isRead = false
                 )
                 notificationDao.addNotification(newNotification)
-
-                // --- KẾT THÚC LOGIC ---
 
                 _uploadEvent.emit(UploadResult.Success("Upload tài liệu thành công"))
 

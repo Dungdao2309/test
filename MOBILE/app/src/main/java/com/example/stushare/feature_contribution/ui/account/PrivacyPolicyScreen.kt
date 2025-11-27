@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.account
+package com.example.stushare.feature_contribution.ui.account
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.stushare.feature_contribution.R
 import com.stushare.feature_contribution.ui.theme.GreenPrimary
+import com.example.stushare.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

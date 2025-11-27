@@ -56,6 +56,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-messaging")
+    implementation(libs.google.material)
 
     // Serialization & Navigation (Bắt buộc cho code mới)
     implementation(libs.kotlinx.serialization.json)
@@ -109,6 +111,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.material.core)
+
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
 }
 
 // Cấu hình Kapt (Bắt buộc cho Hilt + Kotlin 2.0)

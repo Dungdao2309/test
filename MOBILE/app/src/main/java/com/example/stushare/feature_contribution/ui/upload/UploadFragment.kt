@@ -1,8 +1,4 @@
-// trong com.stushare.feature_contribution.ui.upload
-package com.stushare.feature_contribution.ui.upload
-
-import com.stushare.feature_contribution.ui.noti.NotificationItem
-import com.stushare.feature_contribution.ui.noti.NotiFragment
+package com.example.stushare.feature_contribution.ui.upload
 
 import android.app.Activity
 import android.database.Cursor
@@ -22,16 +18,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.stushare.feature_contribution.MainActivity
-import com.stushare.feature_contribution.R
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
+import com.example.stushare.R
+import com.example.stushare.feature_contribution.MainActivity
+import com.example.stushare.feature_contribution.ui.home.HomeFragment 
 
 class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClickListener {
 
     private var selectedUri: Uri? = null
-
-    // 1. Khởi tạo ViewModel (Sẽ hoạt động sau khi bạn thêm dependency ở Bước 1)
     private val viewModel: UploadViewModel by viewModels()
 
     private val pickFileLauncher = registerForActivityResult(
@@ -48,11 +43,9 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
         val etDesc = view.findViewById<EditText>(R.id.et_desc)
         val titleEt = view.findViewById<EditText>(R.id.et_title)
 
-        // initial state
         btnUpload.isEnabled = false
         btnUpload.alpha = 0.6f
 
-        // --- Thiết lập cho EditText mô tả: cố định chiều cao, bật scrollbar và cho phép cuộn nội bộ ---
         etDesc.isVerticalScrollBarEnabled = true
         etDesc.setOnTouchListener { v, event ->
             v.parent?.requestDisallowInterceptTouchEvent(true)
@@ -62,7 +55,6 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
             false
         }
         etDesc.isFocusableInTouchMode = true
-        // --- (Hết code TouchListener) ---
 
         btnChoose.setOnClickListener {
             pickFileLauncher.launch(arrayOf(
@@ -76,7 +68,6 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
             ))
         }
 
-        // 2. Logic Upload được chuyển cho ViewModel
         btnUpload.setOnClickListener {
             val title = titleEt.text?.toString()?.trim() ?: ""
             val desc = etDesc.text?.toString()?.trim()
@@ -91,15 +82,11 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
                 titleEt.requestFocus()
                 return@setOnClickListener
             }
-
-            // Chỉ cần gọi ViewModel, không cần lifecycleScope ở đây
             viewModel.handleUploadClick(title, desc)
         }
 
-        // 3. Lắng nghe StateFlow và SharedFlow từ ViewModel
         observeViewModel(view)
 
-        // --- (Code cho btnCancel và btnBack giữ nguyên) ---
         btnCancel.setOnClickListener {
             selectedUri = null
             resetUiToEmptyState(view)
@@ -107,41 +94,31 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
         }
 
         btnBack.setOnClickListener {
-            // Luôn quay lại màn hình HomeFragment (gọn bằng gọi MainActivity)
-            val mainActivity = activity as? com.stushare.feature_contribution.MainActivity
+            val mainActivity = activity as? MainActivity
             mainActivity?.let {
                 it.supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 it.supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_nav_host, com.stushare.feature_contribution.ui.home.HomeFragment())
+                    .replace(R.id.main_nav_host, HomeFragment())
                     .commit()
             }
         }
     }
 
-    /**
-     * Hàm mới để lắng nghe tất cả các Flow từ ViewModel
-     */
     private fun observeViewModel(rootView: View) {
-        // Sử dụng viewLifecycleOwner cho coroutines
         viewLifecycleOwner.lifecycleScope.launch {
-            // repeatOnLifecycle để đảm bảo coroutine chỉ chạy khi Fragment ở trạng thái STARTED
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-
-                // Lắng nghe trạng thái loading
                 launch {
                     viewModel.isUploading.collect { isLoading ->
                         showProgress(isLoading)
                     }
                 }
-
-                // Lắng nghe sự kiện (thành công / lỗi)
                 launch {
                     viewModel.uploadEvent.collect { result ->
                         when (result) {
                             is UploadViewModel.UploadResult.Success -> {
                                 Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                                resetUiToEmptyState(rootView) // Reset UI
-                                selectedUri = null // Xóa file đã chọn
+                                resetUiToEmptyState(rootView)
+                                selectedUri = null
                             }
                             is UploadViewModel.UploadResult.Error -> {
                                 Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
@@ -153,11 +130,7 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
         }
     }
 
-    // --- (Tất cả các hàm private helper khác giữ nguyên) ---
-
     override fun onFabClicked() {
-        // xử lý khi người dùng bấm FAB (ở Activity), khi fragment đang hiện
-        // Thực hiện hành động tương tự như bấm nút upload trong fragment
         val viewRoot = view ?: return
         val btnUpload = viewRoot.findViewById<Button>(R.id.btn_upload)
         if (btnUpload.isEnabled) {
@@ -171,20 +144,10 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
         selectedUri = uri
         val root = view ?: return
         val activity = requireActivity()
-
         val fileName = queryName(activity, uri) ?: "Đã chọn file"
-
         root.findViewById<TextView>(R.id.tv_selected_name).text = fileName
-
-        // gợi ý tiêu đề (filename không có extension)
-
-        // <<<--- DÒNG BỊ THIẾU CỦA BẠN ĐÃ ĐƯỢC THÊM LẠI Ở ĐÂY ---
         val suggestedTitle = stripExtension(fileName)
-        // --- DÒNG TRÊN --- >>>
-
         root.findViewById<EditText>(R.id.et_title).setText(suggestedTitle)
-
-        // enable Upload button
         val btnUpload = root.findViewById<Button>(R.id.btn_upload)
         btnUpload.isEnabled = true
         btnUpload.alpha = 1f
@@ -203,7 +166,6 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
         view?.findViewById<View>(R.id.progress_overlay)?.isVisible = show
     }
 
-    // Try to read _display_name; fallback to lastPathSegment
     private fun queryName(activity: Activity, uri: Uri): String? {
         var result: String? = null
         val projection = arrayOf("_display_name")
@@ -216,11 +178,7 @@ class UploadFragment : Fragment(R.layout.fragment_upload), MainActivity.FabClick
                     if (idx >= 0) result = it.getString(idx)
                 }
             }
-        } catch (e: Exception) {
-            // ignore
-        } finally {
-            cursor?.close()
-        }
+        } catch (e: Exception) { } finally { cursor?.close() }
         if (result == null) result = uri.lastPathSegment
         return result
     }

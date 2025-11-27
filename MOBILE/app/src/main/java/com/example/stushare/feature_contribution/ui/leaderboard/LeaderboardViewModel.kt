@@ -1,4 +1,5 @@
-package com.stushare.feature_contribution.ui.leaderboard
+
+package com.example.stushare.feature_contribution.ui.leaderboard
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import com.example.stushare.R
 
 data class RankedUser(
     val rank: Int,
@@ -25,7 +27,7 @@ data class RankedDocument(
 )
 
 class LeaderboardViewModel : ViewModel() {
-
+    
     private val db = Firebase.firestore
     private val TAG = "LeaderboardViewModel"
 
@@ -38,7 +40,6 @@ class LeaderboardViewModel : ViewModel() {
     fun fetchRankedUsers() {
         viewModelScope.launch {
             try {
-                // Cần tạo collection 'users' trên Firestore với field: fullName, score
                 val snapshot = db.collection("users")
                     .orderBy("score", Query.Direction.DESCENDING)
                     .limit(10)
@@ -54,14 +55,10 @@ class LeaderboardViewModel : ViewModel() {
                 }
                 _rankedUsers.value = userList
             } catch (e: Exception) {
-                Log.e(TAG, "Error fetching users (Firestore có thể chưa setup): ", e)
-                // Dữ liệu giả lập để test UI nếu chưa có Backend
+                Log.e(TAG, "Error fetching users", e)
                 _rankedUsers.value = listOf(
                     RankedUser(1, "Nguyễn Văn A", 1200),
-                    RankedUser(2, "Trần Thị B", 1100),
-                    RankedUser(3, "Lê Văn C", 980),
-                    RankedUser(4, "Phạm Minh D", 870),
-                    RankedUser(5, "Hoàng E", 760)
+                    RankedUser(2, "Trần Thị B", 1100)
                 )
             }
         }
@@ -70,7 +67,6 @@ class LeaderboardViewModel : ViewModel() {
     fun fetchRankedDocs() {
         viewModelScope.launch {
             try {
-                // Cần tạo collection 'documents' trên Firestore với field: title, authorName, downloadCount
                 val snapshot = db.collection("documents")
                     .orderBy("downloadCount", Query.Direction.DESCENDING)
                     .limit(10)
@@ -87,14 +83,10 @@ class LeaderboardViewModel : ViewModel() {
                 }
                 _rankedDocs.value = docList
             } catch (e: Exception) {
-                Log.e(TAG, "Error fetching docs (Firestore có thể chưa setup): ", e)
-                // Dữ liệu giả lập để test UI
+                Log.e(TAG, "Error fetching docs", e)
                 _rankedDocs.value = listOf(
                     RankedDocument(1, "Đề cương Giải tích 1", "Nguyễn Văn A", 320),
-                    RankedDocument(2, "Slide Cấu trúc dữ liệu", "Trần Thị B", 290),
-                    RankedDocument(3, "Tài liệu Toán rời rạc", "Lê Văn C", 280),
-                    RankedDocument(4, "Đề thi Xác suất TK", "Phạm Minh D", 240),
-                    RankedDocument(5, "Bài giảng Java cơ bản", "Phạm Văn E", 220)
+                    RankedDocument(2, "Slide Cấu trúc dữ liệu", "Trần Thị B", 290)
                 )
             }
         }

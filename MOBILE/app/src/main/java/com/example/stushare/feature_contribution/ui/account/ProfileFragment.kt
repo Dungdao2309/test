@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.account
+package com.example.stushare.feature_contribution.ui.account
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +20,7 @@ import com.stushare.feature_contribution.R
 import com.stushare.feature_contribution.MainActivity
 import com.stushare.feature_contribution.ui.leaderboard.LeaderboardFragment
 import kotlinx.coroutines.launch
+import com.example.stushare.R
 
 class ProfileFragment : Fragment() {
 

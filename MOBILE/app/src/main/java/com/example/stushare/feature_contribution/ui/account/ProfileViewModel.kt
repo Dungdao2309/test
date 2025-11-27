@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.account
+package com.example.stushare.feature_contribution.ui.account
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import com.example.stushare.R
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
 

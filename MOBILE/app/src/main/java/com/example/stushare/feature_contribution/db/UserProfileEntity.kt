@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.db
+package com.example.stushare.feature_contribution.db // <--- Đã sửa package
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

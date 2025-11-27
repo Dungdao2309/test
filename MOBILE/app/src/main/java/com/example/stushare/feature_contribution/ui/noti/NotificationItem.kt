@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.noti
+package com.example.stushare.feature_contribution.ui.noti
 
 data class NotificationItem(
     val id: String = System.currentTimeMillis().toString(),

@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.noti
+package com.example.stushare.feature_contribution.ui.noti
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.stushare.feature_contribution.R
 import androidx.core.content.ContextCompat
+import com.example.stushare.R
 
 class NotificationAdapter(
     private val items: MutableList<NotificationItem> = mutableListOf()

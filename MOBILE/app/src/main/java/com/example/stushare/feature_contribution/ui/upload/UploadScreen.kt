@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.upload
+package com.example.stushare.feature_contribution.ui.upload
 
 import android.net.Uri
 import android.provider.OpenableColumns
@@ -21,8 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.stushare.feature_contribution.R
-import com.stushare.feature_contribution.ui.theme.GreenPrimary
+// Đã sửa import R về đúng package của ứng dụng
+import com.example.stushare.R
 
 @Composable
 fun UploadScreen(
@@ -37,7 +37,7 @@ fun UploadScreen(
     var selectedFileName by remember { mutableStateOf("") }
     var selectedUri by remember { mutableStateOf<Uri?>(null) }
     
-    // String resources for logic
+    // Đã có thể truy cập R.string bình thường
     val noFileStr = stringResource(R.string.upload_no_file)
     if (selectedFileName.isEmpty()) selectedFileName = noFileStr
 
@@ -78,6 +78,8 @@ fun UploadScreen(
 
     val surfaceColor = MaterialTheme.colorScheme.surface
     val onSurfaceColor = MaterialTheme.colorScheme.onSurface
+    // Sử dụng màu cứng thay vì import GreenPrimary bị lỗi
+    val GreenPrimary = Color(0xFF27AE60) 
 
     Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(
@@ -177,6 +179,7 @@ fun UploadScreen(
                         Button(
                             onClick = {
                                 if (selectedUri != null && title.isNotEmpty()) {
+                                    // Lưu ý: Cần kiểm tra hàm này trong ViewModel của bạn có nhận 2 tham số không
                                     viewModel.handleUploadClick(title, description)
                                 } else {
                                     Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()

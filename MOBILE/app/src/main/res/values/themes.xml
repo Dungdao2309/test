@@ -9,6 +9,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme.Contribution" parent="Theme.StuShare">
+        </style>
     <style name="SettingsItemStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>

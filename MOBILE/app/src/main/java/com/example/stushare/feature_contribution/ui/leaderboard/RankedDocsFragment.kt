@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.leaderboard
+package com.example.stushare.feature_contribution.ui.leaderboard
 
 import android.os.Bundle
 import android.view.View
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.stushare.feature_contribution.R
 import kotlinx.coroutines.launch
+import com.example.stushare.R
 
 class RankedDocsFragment : Fragment(R.layout.fragment_simple_text) {
 

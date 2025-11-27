@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.components
+package com.example.stushare.feature_contribution.ui.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.stushare.feature_contribution.navigation.Screen
 import com.stushare.feature_contribution.ui.theme.GreenPrimary
+import com.example.stushare.R
 
 @Composable
 fun BottomNavBar(navController: NavController) {

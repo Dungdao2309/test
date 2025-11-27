@@ -1,7 +1,8 @@
-package com.stushare.feature_contribution.ui.leaderboard
+package com.example.stushare.feature_contribution.ui.leaderboard
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.stushare.R
 
 class LeaderboardPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 

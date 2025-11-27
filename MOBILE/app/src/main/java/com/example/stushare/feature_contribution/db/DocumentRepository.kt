@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.db
+package com.example.stushare.feature_contribution.db
 
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore

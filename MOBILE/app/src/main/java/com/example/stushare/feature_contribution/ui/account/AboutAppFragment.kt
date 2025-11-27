@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.account
+package com.example.stushare.feature_contribution.ui.account
 
 import android.content.Intent
 import android.net.Uri
@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.stushare.feature_contribution.R
+import com.example.stushare.R
 
 class AboutAppFragment : Fragment(R.layout.fragment_about_app) {
 

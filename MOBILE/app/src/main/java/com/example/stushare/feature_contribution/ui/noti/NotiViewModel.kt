@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.noti
+package com.example.stushare.feature_contribution.ui.noti
 
 import android.app.Application
 import android.text.format.DateUtils // <-- THÊM IMPORT NÀY
@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import com.example.stushare.R
 
 class NotiViewModel(application: Application) : AndroidViewModel(application) {
     private val notificationDao = AppDatabase.getInstance(application).notificationDao()

@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.account
+package com.example.stushare.feature_contribution.ui.account
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog // Import AlertDialog
 import androidx.fragment.app.Fragment
 import com.stushare.feature_contribution.R
+import com.example.stushare.R
 
 class AppearanceSettingsFragment : Fragment(R.layout.fragment_appearance_settings) {
 

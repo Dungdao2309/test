@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.noti
+package com.example.stushare.feature_contribution.ui.noti
 
 import android.os.Bundle
 import android.view.View
@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
+import com.example.stushare.R
 
 class NotiFragment : Fragment(R.layout.fragment_noti) {
 

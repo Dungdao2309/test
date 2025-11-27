@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.db
+package com.example.stushare.feature_contribution.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 data class NotificationEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val title: String, // "Chúc mừng!"
-    val message: String, // "Bạn đã đạt 50 điểm đóng góp"
+    val title: String, 
+    val message: String,
     val timestamp: Long,
-    val type: String, // Để phân biệt icon (ví dụ: "system", "like", "milestone")
+    val type: String,
     val isRead: Boolean = false
 )

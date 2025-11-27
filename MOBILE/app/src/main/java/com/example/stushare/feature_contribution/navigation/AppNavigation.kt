@@ -1,36 +1,22 @@
-package com.stushare.feature_contribution.navigation
-
-import com.stushare.feature_contribution.ui.account.SwitchAccountScreen
-import com.stushare.feature_contribution.ui.account.TermsOfUseScreen
-import com.stushare.feature_contribution.ui.account.PrivacyPolicyScreen
-import com.stushare.feature_contribution.ui.account.ReportViolationScreen
-import com.stushare.feature_contribution.ui.account.ContactSupportScreen
-import com.stushare.feature_contribution.ui.account.AboutAppScreen
+package com.example.stushare.feature_contribution.navigation 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.stushare.feature_contribution.ui.account.AccountSecurityScreen
-import com.stushare.feature_contribution.ui.account.ChangePasswordScreen
-import com.stushare.feature_contribution.ui.account.EditAttributeScreen
-import com.stushare.feature_contribution.ui.account.NotificationSettingsScreen
-import com.stushare.feature_contribution.ui.account.PersonalInfoScreen
-import com.stushare.feature_contribution.ui.account.ProfileScreen
-import com.stushare.feature_contribution.ui.account.ProfileViewModel
-import com.stushare.feature_contribution.ui.account.AppearanceSettingsScreen
-import com.stushare.feature_contribution.ui.account.SettingsScreen
-import com.stushare.feature_contribution.ui.home.HomeScreen
-import com.stushare.feature_contribution.ui.leaderboard.LeaderboardScreen
-import com.stushare.feature_contribution.ui.leaderboard.LeaderboardViewModel
-import com.stushare.feature_contribution.ui.noti.NotiScreen
-import com.stushare.feature_contribution.ui.noti.NotiViewModel
-import com.stushare.feature_contribution.ui.search.SearchScreen
-import com.stushare.feature_contribution.ui.upload.UploadScreen
-import com.stushare.feature_contribution.ui.upload.UploadViewModel
 
-// Định nghĩa các màn hình (Routes)
+import com.example.stushare.feature_contribution.ui.account.*
+import com.example.stushare.feature_contribution.ui.home.HomeScreen
+import com.example.stushare.feature_contribution.ui.leaderboard.LeaderboardScreen
+import com.example.stushare.feature_contribution.ui.leaderboard.LeaderboardViewModel
+import com.example.stushare.feature_contribution.ui.noti.NotiScreen
+import com.example.stushare.feature_contribution.ui.noti.NotiViewModel
+import com.example.stushare.feature_contribution.ui.search.SearchScreen
+import com.example.stushare.feature_contribution.ui.upload.UploadScreen
+import com.example.stushare.feature_contribution.ui.upload.UploadViewModel
+import com.example.stushare.R 
+
 sealed class Screen(val route: String) {
     object Home : Screen("home")
     object Search : Screen("search")
@@ -64,32 +50,16 @@ fun AppNavigationGraph(
         startDestination = Screen.Home.route,
         modifier = modifier
     ) {
-        // 1. Home
-        composable(Screen.Home.route) {
-            HomeScreen()
-        }
-
-        // 2. Search
-        composable(Screen.Search.route) {
-            SearchScreen()
-        }
-
-        // 3. Upload
+        composable(Screen.Home.route) { HomeScreen() }
+        composable(Screen.Search.route) { SearchScreen() }
         composable(Screen.Upload.route) {
             val viewModel: UploadViewModel = viewModel()
-            UploadScreen(
-                viewModel = viewModel,
-                onBackClick = { navController.popBackStack() }
-            )
+            UploadScreen(viewModel = viewModel, onBackClick = { navController.popBackStack() })
         }
-
-        // 4. Notification
         composable(Screen.Noti.route) {
             val viewModel: NotiViewModel = viewModel()
             NotiScreen(viewModel = viewModel)
         }
-
-        // 5. Profile
         composable(Screen.Profile.route) {
             val viewModel: ProfileViewModel = viewModel()
             ProfileScreen(
@@ -98,17 +68,10 @@ fun AppNavigationGraph(
                 onOpenLeaderboard = { navController.navigate(Screen.Leaderboard.route) }
             )
         }
-
-        // 6. Leaderboard
         composable(Screen.Leaderboard.route) {
             val viewModel: LeaderboardViewModel = viewModel()
-            LeaderboardScreen(
-                viewModel = viewModel,
-                onBackClick = { navController.popBackStack() }
-            )
+            LeaderboardScreen(viewModel = viewModel, onBackClick = { navController.popBackStack() })
         }
-
-        // 7. Settings
         composable(Screen.Settings.route) {
             SettingsScreen(
                 onBackClick = { navController.popBackStack() },
@@ -121,8 +84,6 @@ fun AppNavigationGraph(
                 onSwitchAccountClick = { navController.navigate(Screen.SwitchAccount.route) }
             )
         }
-
-        // 8. Account & Security
         composable(Screen.AccountSecurity.route) {
             AccountSecurityScreen(
                 onBackClick = { navController.popBackStack() },
@@ -130,95 +91,34 @@ fun AppNavigationGraph(
                 onPhoneClick = { navController.navigate(Screen.EditPhone.route) },
                 onEmailClick = { navController.navigate(Screen.EditEmail.route) },
                 onPasswordClick = { navController.navigate(Screen.ChangePassword.route) },
-                onDeleteAccountClick = { /* TODO: Show dialog confirm */ }
+                onDeleteAccountClick = { /* TODO */ }
             )
         }
-
-        // 9. Personal Info
-        composable(Screen.PersonalInfo.route) {
-            PersonalInfoScreen(onBackClick = { navController.popBackStack() })
-        }
-
-        // 10. Change Password
-        composable(Screen.ChangePassword.route) {
-            ChangePasswordScreen(onBackClick = { navController.popBackStack() })
-        }
-
-        // 11. Edit Phone
+        composable(Screen.PersonalInfo.route) { PersonalInfoScreen(onBackClick = { navController.popBackStack() }) }
+        composable(Screen.ChangePassword.route) { ChangePasswordScreen(onBackClick = { navController.popBackStack() }) }
         composable(Screen.EditPhone.route) {
-            val title = androidx.compose.ui.res.stringResource(com.stushare.feature_contribution.R.string.title_edit_phone)
-            val label = androidx.compose.ui.res.stringResource(com.stushare.feature_contribution.R.string.label_edit_phone)
-            
-            EditAttributeScreen(
-                title = title,
-                label = label,
-                initialValue = "0123456789",
-                onBackClick = { navController.popBackStack() }
-            )
+            val title = androidx.compose.ui.res.stringResource(R.string.title_edit_phone)
+            val label = androidx.compose.ui.res.stringResource(R.string.label_edit_phone)
+            EditAttributeScreen(title = title, label = label, initialValue = "0123456789", onBackClick = { navController.popBackStack() })
         }
-
-        // 12. Edit Email
         composable(Screen.EditEmail.route) {
-            val title = androidx.compose.ui.res.stringResource(com.stushare.feature_contribution.R.string.title_edit_email)
-            val label = androidx.compose.ui.res.stringResource(com.stushare.feature_contribution.R.string.label_edit_email)
-
-            EditAttributeScreen(
-                title = title,
-                label = label,
-                initialValue = "dungdao@test.com",
-                onBackClick = { navController.popBackStack() }
+            val title = androidx.compose.ui.res.stringResource(R.string.title_edit_email)
+            val label = androidx.compose.ui.res.stringResource(R.string.label_edit_email)
+            EditAttributeScreen(title = title, label = label, initialValue = "dungdao@test.com", onBackClick = { navController.popBackStack() })
+        }
+        composable(Screen.NotificationSettings.route) { NotificationSettingsScreen(onBackClick = { navController.popBackStack() }) }
+        composable(Screen.AppearanceSettings.route) { AppearanceSettingsScreen(onBackClick = { navController.popBackStack() }) }
+        composable(Screen.AboutApp.route) {
+            AboutAppScreen(
+                onBackClick = { navController.popBackStack() },
+                onTermsClick = { navController.navigate(Screen.TermsOfUse.route) },
+                onPrivacyClick = { navController.navigate(Screen.PrivacyPolicy.route) }
             )
         }
-
-        // 13. Notification Settings
-        composable(Screen.NotificationSettings.route) {
-            NotificationSettingsScreen(
-                onBackClick = { navController.popBackStack() }
-            )
-        }
-
-        composable(Screen.AppearanceSettings.route) {
-        AppearanceSettingsScreen(
-            onBackClick = { navController.popBackStack() }
-        )
-    }
-
-    composable(Screen.AboutApp.route) {
-        AboutAppScreen(
-            onBackClick = { navController.popBackStack() },
-            onTermsClick = { navController.navigate(Screen.TermsOfUse.route) },
-            onPrivacyClick = { navController.navigate(Screen.PrivacyPolicy.route) } 
-        )
-    }
-
-    composable(Screen.TermsOfUse.route) {
-        TermsOfUseScreen(
-            onBackClick = { navController.popBackStack() }
-        )
-    }
-
-    composable(Screen.PrivacyPolicy.route) {
-        PrivacyPolicyScreen(
-            onBackClick = { navController.popBackStack() }
-        )
-    }
-
-    composable(Screen.ContactSupport.route) {
-        ContactSupportScreen(
-            onBackClick = { navController.popBackStack() }
-        )
-    }
-
-    composable(Screen.ReportViolation.route) {
-        ReportViolationScreen(
-            onBackClick = { navController.popBackStack() }
-        )
-    }
-
-    composable(Screen.SwitchAccount.route) {
-        SwitchAccountScreen(
-            onBackClick = { navController.popBackStack() }
-        )
-    }
+        composable(Screen.TermsOfUse.route) { TermsOfUseScreen(onBackClick = { navController.popBackStack() }) }
+        composable(Screen.PrivacyPolicy.route) { PrivacyPolicyScreen(onBackClick = { navController.popBackStack() }) }
+        composable(Screen.ContactSupport.route) { ContactSupportScreen(onBackClick = { navController.popBackStack() }) }
+        composable(Screen.ReportViolation.route) { ReportViolationScreen(onBackClick = { navController.popBackStack() }) }
+        composable(Screen.SwitchAccount.route) { SwitchAccountScreen(onBackClick = { navController.popBackStack() }) }
     }
 }

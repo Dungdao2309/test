@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.db
+package com.example.stushare.feature_contribution.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,6 +14,5 @@ data class SavedDocumentEntity(
     val addedTimestamp: Long = System.currentTimeMillis(),
     val downloadCount: Int = 0
 ) {
-    // Firestore và Room cần constructor rỗng, việc cung cấp giá trị mặc định
-    // cho tất cả tham số trong constructor chính sẽ tự động tạo ra constructor rỗng này.
+    // Firestore và Room cần constructor rỗng
 }

@@ -1,4 +1,4 @@
-package com.stushare.feature_contribution.ui.search
+package com.example.stushare.feature_contribution.ui.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.stushare.feature_contribution.R
 import com.stushare.feature_contribution.ui.theme.GreenPrimary
+import com.example.stushare.R
 
 @Composable
 fun SearchScreen() {
